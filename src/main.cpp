@@ -10,6 +10,7 @@
 
 using byte = std::int8_t;
 
+constexpr const char* LOCALHOST = "127.0.0.1";
 constexpr int delay{ 20 }; // delay between packet send, in ms
 
 void cleanup(int signal) {
@@ -24,9 +25,19 @@ void cleanup(int signal) {
     std::exit(0);
 }
 
-int main() {
+int main(int argc, char**argv) {
+    const char *addr;
+
+    if(argc > 1) {
+        addr = argv[1];
+    } else {
+        addr = LOCALHOST;
+    }
+
+    std::cout << "Using address: " << addr << '\n';
+
     std::signal(SIGINT, cleanup);
-    Net::init("127.0.0.1", 1110);
+    Net::init(addr, 1110);
 
     unsigned long long count{ 0 };
     Net::byte data[6];

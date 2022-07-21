@@ -10,3 +10,7 @@ in the root directory of the repository. Then:
 ```
 ./robotspoofenabled
 ```
+Optionally specify rio address (default: 127.0.0.1):
+```
+./robotspoofenabled 10.68.29.2
+```
